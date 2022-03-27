@@ -1,22 +1,19 @@
 import { ref } from "vue";
 import axios from "axios";
 
-const movies = ref();
+const quotes = ref();
 
 const api = axios.create({
-    baseURL: "https://the-one-api.dev/v2/",
-    headers: {
-        Authorization: "Bearer FEy_RMvQlloNnUc1cmOs"
-    },
+    baseURL: "https://strangerthings-quotes.vercel.app/api/quotes",
 });
 
 export const useApi = () => {
-    const getMovies = async () => {
-        const response = await api.get("movie");
-        movies.value = response.data.docs;
+    const getQuotes = async () => {
+        const response = await api.get("quote");
+        quotes.value = response.data;
     };
 
-    getMovies();
+    getQuotes();
 
-    return { movies, getMovies };  
+    return { quotes, getQuotes };  
 };
